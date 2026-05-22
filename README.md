@@ -73,3 +73,9 @@ Google Accounts (`accounts.google.com`) enforces strict security policies to pre
 ## Security & Privacy
 - **Self-Contained**: The extension is completely self-contained, using zero remote script files (complying with the Chrome Web Store Developer Program Policies).
 - **Data Protection**: All notes remain private between your browser and Google Keep's secure servers. No user data is collected, stored, or transmitted by the developer.
+
+---
+
+## Contributors
+
+- **Kumar Amiya** ([@kumaramiya8](https://github.com/kumaramiya8))
