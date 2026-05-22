@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <linearGradient id="yellowGrad48" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F" />
+      <stop offset="100%" stop-color="#FBBC04" />
+    </linearGradient>
+  </defs>
+  <!-- Background Card -->
+  <rect width="44" height="44" x="2" y="2" rx="10" fill="url(#yellowGrad48)" />
+  
+  <!-- Lightbulb Glow -->
+  <circle cx="24" cy="21" r="8" fill="#FFFDE7" />
+  
+  <!-- Bulb Base/Filament -->
+  <path d="M20 29h8v3a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-3z" fill="#424242" />
+  <rect x="22" y="34" width="4" height="1" rx="0.5" fill="#9E9E9E" />
+  
+  <!-- Lightbulb Outline -->
+  <path d="M24 13c-4.4 0-8 3.6-8 8 0 2.8 1.4 5.4 3.6 7V30h8.8v-2c2.2-1.6 3.6-4.2 3.6-7 0-4.4-3.6-8-8-8z" fill="#FFFDE7" stroke="#424242" stroke-width="2.2" stroke-linejoin="round" />
+</svg>

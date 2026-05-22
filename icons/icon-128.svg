@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F" />
+      <stop offset="100%" stop-color="#FBBC04" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <!-- Background Card -->
+  <rect width="120" height="120" x="4" y="4" rx="28" fill="url(#yellowGrad)" filter="url(#shadow)" />
+  
+  <!-- Outer Lightbulb Glow -->
+  <circle cx="64" cy="56" r="22" fill="#FFFDE7" opacity="0.9"/>
+  
+  <!-- Bulb Base/Filament -->
+  <path d="M54 78h20v6a4 4 0 0 1-4 4H58a4 4 0 0 1-4-4v-6z" fill="#424242" />
+  <rect x="58" y="88" width="12" height="3" rx="1.5" fill="#9E9E9E" />
+  
+  <!-- Lightbulb Outline and details -->
+  <path d="M64 34c-11 0-20 9-20 20 0 7 3.5 13.5 9 17.5V78h22v-6.5c5.5-4 9-10.5 9-17.5 0-11-9-20-20-20z" fill="#FFFDE7" stroke="#424242" stroke-width="4" stroke-linejoin="round" />
+  
+  <!-- Filament details inside -->
+  <path d="M58 54a6 6 0 0 1 12 0" stroke="#424242" stroke-width="3" stroke-linecap="round" fill="none" />
+  <line x1="64" y1="46" x2="64" y2="38" stroke="#424242" stroke-width="3" stroke-linecap="round" />
+</svg>
