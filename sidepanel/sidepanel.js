@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4500);
   }
 
-  // 4. Listen for text selection messages from service worker
+  // 4. Listen for text selection and UI sync messages
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === 'TEXT_COPIED' && message.text) {
       // Backup copy in the extension context
@@ -118,6 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
           console.warn('Extension context clipboard write skipped, host tab already wrote to clipboard.', err);
           showToast('Text Copied!', 'Select a Keep note and paste (Cmd+V).');
         });
+    } else if (message.type === 'KEEP_BG_COLOR' && message.color) {
+      document.documentElement.style.setProperty('--bg-color', message.color);
+      // Derive translucent header/footer bg color
+      const translucentColor = message.color
+        .replace('rgb(', 'rgba(')
+        .replace(')', ', 0.85)');
+      document.documentElement.style.setProperty('--header-bg', translucentColor);
     }
   });
 

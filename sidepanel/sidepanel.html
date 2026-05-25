@@ -11,62 +11,20 @@
 </head>
 <body>
   <div class="sidebar-container">
-    <!-- Header -->
-    <header class="app-header">
-      <div class="brand">
-        <div class="logo-container">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 21H15C15 21.55 14.55 22 14 22H10C9.45 22 9 21.55 9 21ZM12 2C7.58 2 4 5.58 4 10C4 12.82 5.46 15.3 7.68 16.74C8.48 17.26 9 18.15 9 19H15C15 18.15 15.52 17.26 16.32 16.74C18.54 15.3 20 12.82 20 10C20 5.58 16.42 2 12 2Z" fill="#ffb300"/>
-          </svg>
-        </div>
-        <h1>Google Keep</h1>
+    <!-- Main Content Area -->
+    <main class="iframe-container">
+      <div id="loading-spinner" class="loading-overlay">
+        <div class="spinner"></div>
+        <span>Loading Google Keep...</span>
       </div>
-      
-      <div class="actions">
-        <!-- Zoom Controls -->
-        <div class="zoom-controls">
-          <button id="btn-zoom-out" class="zoom-btn" title="Zoom Out">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </button>
-          <span id="zoom-label">85%</span>
-          <button id="btn-zoom-in" class="zoom-btn" title="Zoom In">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </button>
-        </div>
+      <iframe 
+        id="keep-iframe" 
+        src="https://keep.google.com/u/0/" 
+        allow="clipboard-read; clipboard-write"
+      ></iframe>
+    </main>
 
-        <!-- Info/Tip Button -->
-        <button id="btn-tips" class="action-btn" title="How to use">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-          </svg>
-        </button>
-
-        <!-- Refresh Button -->
-        <button id="btn-refresh" class="action-btn" title="Refresh Keep">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
-          </svg>
-        </button>
-
-        <!-- Open in New Tab Button -->
-        <button id="btn-popout" class="action-btn" title="Open in new tab (Sign In)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
-          </svg>
-        </button>
-      </div>
-    </header>
-
-    <!-- Tips Panel -->
+    <!-- Tips Panel (Absolute Positioned, anchored to bottom footer) -->
     <div id="tips-panel" class="tips-container hidden">
       <div class="tips-header">
         <h2>Quick Tips</h2>
@@ -97,18 +55,53 @@
       </ul>
     </div>
 
-    <!-- Main Content Area -->
-    <main class="iframe-container">
-      <div id="loading-spinner" class="loading-overlay">
-        <div class="spinner"></div>
-        <span>Loading Google Keep...</span>
+    <!-- Footer Controls -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <!-- Zoom Controls -->
+        <div class="zoom-controls">
+          <button id="btn-zoom-out" class="zoom-btn" title="Zoom Out">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <span id="zoom-label">85%</span>
+          <button id="btn-zoom-in" class="zoom-btn" title="Zoom In">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+        </div>
       </div>
-      <iframe 
-        id="keep-iframe" 
-        src="https://keep.google.com/u/0/" 
-        allow="clipboard-read; clipboard-write"
-      ></iframe>
-    </main>
+      
+      <div class="footer-right">
+        <!-- Info/Tip Button -->
+        <button id="btn-tips" class="action-btn" title="How to use">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </button>
+
+        <!-- Refresh Button -->
+        <button id="btn-refresh" class="action-btn" title="Refresh Keep">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+          </svg>
+        </button>
+
+        <!-- Open in New Tab Button -->
+        <button id="btn-popout" class="action-btn" title="Open in new tab (Sign In)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </button>
+      </div>
+    </footer>
 
     <!-- Toast Notification Overlay -->
     <div id="sidebar-toast" class="toast hidden">

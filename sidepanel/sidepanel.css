@@ -51,42 +51,29 @@ html, body {
   position: relative;
 }
 
-/* Header Styling */
-.app-header {
+/* Footer Styling */
+.app-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 16px;
+  padding: 4px 12px;
   background-color: var(--header-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
   z-index: 100;
   flex-shrink: 0;
+  height: 40px;
 }
 
-.brand {
+.footer-left {
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
-.logo-container {
+.footer-right {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.app-header h1 {
-  font-family: var(--font-header);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-main);
-  letter-spacing: -0.2px;
-}
-
-.actions {
-  display: flex;
   gap: 4px;
 }
 
@@ -94,8 +81,8 @@ html, body {
   background: transparent;
   border: none;
   border-radius: 50%;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -122,7 +109,7 @@ html, body {
   border-radius: 20px;
   padding: 2px 6px;
   margin-right: 6px;
-  height: 34px;
+  height: 30px;
   user-select: none;
   border: 1px solid var(--border-color);
 }
@@ -219,12 +206,12 @@ html, body {
 /* Tips Container */
 .tips-container {
   position: absolute;
-  top: 55px; /* right below header */
+  bottom: 40px; /* right above footer */
   left: 0;
   right: 0;
   background-color: var(--bg-color);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: var(--shadow-md);
+  border-top: 1px solid var(--border-color);
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
   padding: 16px;
   z-index: 90;
   transform: translateY(0);
@@ -233,7 +220,7 @@ html, body {
 }
 
 .tips-container.hidden {
-  transform: translateY(-100%);
+  transform: translateY(100%);
   opacity: 0;
   pointer-events: none;
 }
