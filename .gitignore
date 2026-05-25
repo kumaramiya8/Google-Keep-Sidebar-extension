@@ -4,3 +4,7 @@
 # Python
 __pycache__/
 *.pyc
+
+# Chrome Extension Metadata
+_metadata/
+

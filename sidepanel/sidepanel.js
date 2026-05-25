@@ -8,54 +8,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnTips = document.getElementById('btn-tips');
   const btnCloseTips = document.getElementById('btn-close-tips');
   const tipsPanel = document.getElementById('tips-panel');
-  const btnZoomOut = document.getElementById('btn-zoom-out');
-  const btnZoomIn = document.getElementById('btn-zoom-in');
-  const zoomLabel = document.getElementById('zoom-label');
   const toast = document.getElementById('sidebar-toast');
-
   let toastTimeout;
 
   // Zoom management
-  const ZOOM_STEPS = [50, 60, 70, 80, 85, 90, 95, 100, 110, 120, 130, 140, 150];
   const ZOOM_STORAGE_KEY = 'keep-sidebar-zoom';
   
-  // Default to 85% as Keep is usually very zoomed in on mobile viewports
-  let currentZoom = parseInt(localStorage.getItem(ZOOM_STORAGE_KEY)) || 85;
-
-  function updateZoom(zoomVal) {
-    currentZoom = zoomVal;
+  function applyZoom(zoomVal) {
     iframe.style.zoom = `${zoomVal}%`;
-    zoomLabel.innerText = `${zoomVal}%`;
-    localStorage.setItem(ZOOM_STORAGE_KEY, zoomVal);
   }
 
-  // Initial zoom application
-  updateZoom(currentZoom);
-
-  btnZoomOut.addEventListener('click', () => {
-    // Find next lower step
-    const currentIndex = ZOOM_STEPS.indexOf(currentZoom);
-    if (currentIndex > 0) {
-      updateZoom(ZOOM_STEPS[currentIndex - 1]);
-    } else if (currentIndex === -1) {
-      // Find closest lower step
-      const lowerSteps = ZOOM_STEPS.filter(step => step < currentZoom);
-      if (lowerSteps.length > 0) {
-        updateZoom(lowerSteps[lowerSteps.length - 1]);
-      }
-    }
+  // Load and apply initial zoom (default to 75%)
+  chrome.storage.local.get(ZOOM_STORAGE_KEY).then((result) => {
+    const savedZoom = result[ZOOM_STORAGE_KEY] || 75;
+    applyZoom(savedZoom);
   });
 
-  btnZoomIn.addEventListener('click', () => {
-    // Find next higher step
-    const currentIndex = ZOOM_STEPS.indexOf(currentZoom);
-    if (currentIndex !== -1 && currentIndex < ZOOM_STEPS.length - 1) {
-      updateZoom(ZOOM_STEPS[currentIndex + 1]);
-    } else if (currentIndex === -1) {
-      // Find closest higher step
-      const higherSteps = ZOOM_STEPS.filter(step => step > currentZoom);
-      if (higherSteps.length > 0) {
-        updateZoom(higherSteps[0]);
+  // Listen for zoom changes from the extension popup
+  chrome.storage.onChanged.addListener((changes, areaName) => {
+    if (areaName === 'local' && changes[ZOOM_STORAGE_KEY]) {
+      const newZoom = changes[ZOOM_STORAGE_KEY].newValue;
+      if (newZoom !== undefined) {
+        applyZoom(newZoom);
       }
     }
   });
@@ -65,13 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
     loadingOverlay.classList.add('fade-out');
   });
 
+  // Start loading the iframe dynamically to avoid DOM load race conditions
+  iframe.src = "https://keep.google.com/u/0/";
+
   // 2. Control Button Handlers
   
   // Refresh iframe
   btnRefresh.addEventListener('click', () => {
     loadingOverlay.classList.remove('fade-out');
-    // Reloading iframe by setting its source
-    iframe.src = iframe.src;
+    iframe.src = "https://keep.google.com/u/0/";
   });
 
   // Open Keep in new tab (useful for full page and Google login flow)
@@ -106,10 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4500);
   }
 
-  // 4. Listen for text selection and UI sync messages
+  // 4. Listen for text selection messages from service worker
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === 'TEXT_COPIED' && message.text) {
-      // Backup copy in the extension context
       navigator.clipboard.writeText(message.text)
         .then(() => {
           showToast('Text Copied!', 'Select a Keep note and paste (Cmd+V).');
@@ -118,22 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
           console.warn('Extension context clipboard write skipped, host tab already wrote to clipboard.', err);
           showToast('Text Copied!', 'Select a Keep note and paste (Cmd+V).');
         });
-    } else if (message.type === 'KEEP_BG_COLOR' && message.color) {
-      document.documentElement.style.setProperty('--bg-color', message.color);
-      // Derive translucent header/footer bg color
-      const translucentColor = message.color
-        .replace('rgb(', 'rgba(')
-        .replace(')', ', 0.85)');
-      document.documentElement.style.setProperty('--header-bg', translucentColor);
     }
   });
 
   // 5. Check if there was any text copied recently before opening the sidepanel
   chrome.storage.session.get('lastCopiedText').then((result) => {
     if (result.lastCopiedText) {
-      // Show toast reminder
       showToast('Text Ready to Paste!', 'Paste the captured text into your Keep note.');
-      // Clear the session storage so it doesn't prompt again on every reopen
       chrome.storage.session.remove('lastCopiedText');
     }
   });

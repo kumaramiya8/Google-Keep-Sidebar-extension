@@ -8,13 +8,13 @@
         { "header": "Sec-Fetch-Dest", "operation": "set", "value": "document" },
         { "header": "Sec-Fetch-Site", "operation": "set", "value": "same-origin" },
         { "header": "Sec-Ch-Ua-Mobile", "operation": "set", "value": "?1" },
-        { "header": "Sec-Ch-Ua-Platform", "operation": "set", "value": "\"Android\"" },
+        { "header": "Sec-Ch-Ua-Platform", "operation": "set", "value": "\"iOS\"" },
         { "header": "Referer", "operation": "set", "value": "https://keep.google.com/" },
         { "header": "Origin", "operation": "set", "value": "https://keep.google.com" },
         {
           "header": "User-Agent",
           "operation": "set",
-          "value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36"
+          "value": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1"
         },
         { "header": "Viewport-Width", "operation": "set", "value": "350" }
       ],
@@ -31,7 +31,16 @@
     },
     "condition": {
       "urlFilter": "||keep.google.com",
-      "resourceTypes": ["sub_frame"]
+      "resourceTypes": [
+        "sub_frame",
+        "script",
+        "xmlhttprequest",
+        "stylesheet",
+        "image",
+        "font",
+        "other"
+      ],
+      "excludedTopDomains": ["google.com", "keep.google.com"]
     }
   }
 ]

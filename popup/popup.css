@@ -1,0 +1,155 @@
+/* Custom styling for Google Keep Sidebar settings popup */
+
+:root {
+  --primary-color: #fbbc04;
+  --primary-hover: #e5ad03;
+  --bg-color: #ffffff;
+  --text-main: #3c4043;
+  --text-muted: #5f6368;
+  --border-color: #e0e0e0;
+  --btn-hover: #f1f3f4;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --font-header: 'Outfit', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #202124;
+    --text-main: #e8eaed;
+    --text-muted: #9aa0a6;
+    --border-color: #3c4043;
+    --btn-hover: #303134;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 220px;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 13px;
+  overflow: hidden;
+}
+
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.popup-header {
+  margin-bottom: 12px;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-area h1 {
+  font-family: var(--font-header);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+}
+
+.group-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+/* Zoom Controls */
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--btn-hover);
+  border-radius: 20px;
+  padding: 2px 8px;
+  height: 32px;
+  width: 100%;
+}
+
+.zoom-btn {
+  background: transparent;
+  border: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.zoom-btn:hover {
+  background-color: var(--border-color);
+  color: var(--text-main);
+}
+
+.zoom-btn:active {
+  transform: scale(0.85);
+}
+
+#zoom-label {
+  font-family: var(--font-header);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  user-select: none;
+}
+
+/* Primary Button */
+.primary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 34px;
+  background-color: var(--primary-color);
+  color: #000000;
+  border: none;
+  border-radius: 17px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.primary-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.primary-btn:active {
+  transform: scale(0.97);
+}

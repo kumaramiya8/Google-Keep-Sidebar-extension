@@ -2,10 +2,6 @@
 
 // Initialize on extension installation
 chrome.runtime.onInstalled.addListener(() => {
-  // Set panel behavior to open on action click (extension icon click)
-  chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true })
-    .catch((error) => console.error("Error setting panel behavior:", error));
-
   // Create context menu for text selection
   chrome.contextMenus.create({
     id: "send-to-keep",

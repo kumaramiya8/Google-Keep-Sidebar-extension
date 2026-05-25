@@ -31,7 +31,8 @@
     "default_path": "sidepanel/sidepanel.html"
   },
   "action": {
-    "default_title": "Open Google Keep Sidebar",
+    "default_popup": "popup/popup.html",
+    "default_title": "Google Keep Sidebar Settings",
     "default_icon": {
       "16": "icons/icon-16.png",
       "48": "icons/icon-48.png",
@@ -44,10 +45,10 @@
         "*://keep.google.com/*",
         "*://*.keep.google.com/*"
       ],
-      "css": ["inject/keep-override.css"],
-      "js": ["inject/keep-override.js"],
+      "js": ["inject/keep-main-world.js"],
       "all_frames": true,
-      "run_at": "document_start"
+      "run_at": "document_start",
+      "world": "MAIN"
     }
   ],
   "icons": {
