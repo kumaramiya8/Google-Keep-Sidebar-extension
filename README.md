@@ -7,10 +7,13 @@ A premium, modern Manifest V3 Chrome Extension that brings Google Keep as a nati
 ## Key Features
 
 - 📱 **Native Sidebar Panel**: Renders Google Keep as a native side panel next to any open tab (`chrome.sidePanel`) for seamless side-by-side multitasking.
+- 🎨 **Sleek Custom Redesign**: Relocates extension controls to a bottom glassmorphic status footer, putting Google Keep's native search and navigation at the top where they belong—preventing header clutter.
+- 🚀 **DOM Cleanup & Style Injection**: Dynamically hides Google branding/logos, account profiles, and app installer promos while resizing margins and note cards to fit perfectly in a narrow view.
+- 🎨 **Theme Background Auto-Sync**: Monitors and automatically synchronizes the background and footer colors of the side panel to Google Keep's active theme (light or dark mode) for a unified UI.
 - 🔍 **Dynamic Zoom Controller**: Adjust the scale of Google Keep from **50% to 150%** (defaults to a comfortable **85%** to fit mobile layouts perfectly on desktop monitors). Your preference is saved automatically via `localStorage`.
 - 📋 **Quick Note Capture**: Select text on any webpage, right-click, and select **"Send to Google Keep"** to copy it instantly. A toast notification slides in on the page to confirm the capture.
 - 🖱️ **Drag-and-Drop support**: Select text on any webpage and drag it directly into your Keep notes.
-- 🌗 **System Theme Sync**: The header container uses modern glassmorphism styling and syncs automatically with system light or dark mode preferences.
+- 🌗 **System Theme Sync**: The footer container uses modern glassmorphism styling and syncs automatically with system and application light or dark mode preferences.
 - ⌨️ **Keyboard Shortcut**: Press **`Alt+Shift+K`** (or `Option+Shift+K` on macOS) to toggle the sidebar open instantly.
 
 ---
@@ -29,6 +32,9 @@ keep-sidebar-extension/
 │   ├── icon-16.png
 │   ├── icon-48.png
 │   └── icon-128.png
+├── inject/               # Google Keep iframe styling & script injections
+│   ├── keep-override.css
+│   └── keep-override.js
 └── sidepanel/            # Sidebar UI components
     ├── sidepanel.html
     ├── sidepanel.css
